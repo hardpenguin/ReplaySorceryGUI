@@ -28,7 +28,7 @@ Start the GUI
     python3 gui.py
 
 ## Screenshot
-![Screenshot of ReplaySorceryGUI window](https://github.com/hardpenguin/replay-sorcery-gui/raw/master/screenshot.png)
+![Screenshot of ReplaySorceryGUI window](https://github.com/hardpenguin/ReplaySorceryGUI/raw/master/screenshot.png)
 
 ## Todo
 
