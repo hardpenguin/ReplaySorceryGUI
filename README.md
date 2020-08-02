@@ -32,5 +32,7 @@ Start the GUI
 
 ## Todo
 
+- support for ReplaySorcery configuration options
+- ability to preview saved videos
 - proper building (PyInstaller?)
 - perhaps .deb for Debian distros
