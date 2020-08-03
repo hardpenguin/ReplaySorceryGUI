@@ -9,7 +9,7 @@
 - psutil
 - ReplaySorcery
 
-First two can be installed on Debian/Ubuntu by running:
+First three can be installed on Debian/Ubuntu by running:
 
     sudo apt-get install python3 python3-pyqt5 python3-psutil
 
