@@ -13,29 +13,36 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 app = QApplication([])
 
+icon_path = 'icon.png'
+
 class ReplaySorceryGUI(QWidget):
 
-   def __init__(self):
+   def __init__(self, debug):
+      self.debug = debug
+      self.rs = ReplaySorcery(self.debug)
+
       QWidget.__init__(self)
       self.setWindowTitle('ReplaySorceryGUI')
-      self.setWindowIcon(QIcon('icon.png')) 
+      self.setWindowIcon(QIcon(icon_path))
       self.setMinimumWidth(300)
 
-      layout = QVBoxLayout()
-      layout.setAlignment(Qt.AlignCenter)
+      app_layout = QHBoxLayout()
 
-      self.rs = ReplaySorcery()
+      # left side
 
-      self.icon = QPixmap("icon.png")
+      left_layout = QVBoxLayout()
+      left_layout.setAlignment(Qt.AlignCenter)
+
+      self.icon = QPixmap(icon_path)
       self.icon = self.icon.scaled(92, 92)
       self.icon_label = QLabel()
       self.icon_label.setPixmap(self.icon)
       self.icon_label.setAlignment(Qt.AlignCenter)
-      layout.addWidget(self.icon_label)
+      left_layout.addWidget(self.icon_label)
 
       self.status_text = QLabel()
       self.update_status_text()
-      layout.addWidget(self.status_text)
+      left_layout.addWidget(self.status_text)
 
       self.timer = QTimer(self)
       self.timer.timeout.connect(self.update_status_text)  
@@ -62,9 +69,19 @@ class ReplaySorceryGUI(QWidget):
 
       for button in buttons:
          button.setFixedSize(button_size)
-         layout.addWidget(button)
+         left_layout.addWidget(button)
 
-      self.setLayout(layout)
+      # right side
+
+      right_layout = QVBoxLayout()
+      right_layout.setAlignment(Qt.AlignCenter)
+
+      # both sides
+
+      app_layout.addLayout(left_layout)
+      app_layout.addLayout(right_layout)
+
+      self.setLayout(app_layout)
 
    def update_status_text(self):
       text_string = "ReplaySorcery: %s" % self.rs.current_status["name"]
@@ -83,10 +100,12 @@ class ReplaySorceryGUI(QWidget):
       self.rs.get_status()
 
    def quit_action(self):
-      print("Exiting ReplaySorceryGUI")
+      if self.debug > 0:
+         print("Exiting ReplaySorceryGUI")
       sys.exit()
 
-window = ReplaySorceryGUI()
+window = ReplaySorceryGUI(1)
 window.show()
-print("ReplaySorceryGUI started")
+if window.debug > 0:
+   print("ReplaySorceryGUI started")
 app.exec_()
