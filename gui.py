@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import sys
+import os
 import signal
 
 from PyQt5.QtWidgets import *
@@ -13,7 +14,10 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 app = QApplication([])
 
-icon_path = 'icon.png'
+dir_name = os.path.dirname(sys.argv[0])        
+full_path = os.path.abspath(dir_name)
+icon_filename = 'icon.png'
+icon_path = os.path.join(full_path, icon_filename)
 
 class ReplaySorceryGUI(QWidget):
 

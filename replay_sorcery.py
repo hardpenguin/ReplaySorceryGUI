@@ -1,11 +1,26 @@
 import os
+import configparser
 
 import psutil
 
 class ReplaySorcery(object):
     def __init__(self, debug=1):
         self.debug = debug
-        
+
+        self._config_file_name = "replay-sorcery.conf"
+        self._config_directories = {
+                                        "user": os.getenv("XDG_CONFIG_HOME"),
+                                        "system": "/etc/xdg/"
+                                    }
+
+        if not self._config_directories["user"]:
+            self._config_directories["user"] = os.getenv("HOME")
+
+        self._config_paths = {}
+        for name, directory in self._config_directories.items():
+            self._config_paths[name] = os.path.join(directory,
+                                                    self._config_file_name)
+
         self._statuses = {
                             "unknown": {
                                 "name": "Unknown",
