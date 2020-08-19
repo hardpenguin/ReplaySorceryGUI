@@ -2,6 +2,8 @@ import os
 
 import psutil
 
+DEBUG = False
+
 class ReplaySorcery(object):
     def __init__(self):
         self._statuses = {
@@ -28,7 +30,8 @@ class ReplaySorcery(object):
         self.get_status()
 
     def get_status(self):
-        print("Getting current ReplaySorcery status: ", end="")
+        if DEBUG:
+            print("Getting current ReplaySorcery status: ", end="")
 
         process_found = False
         for proc in psutil.process_iter(["name"]):
@@ -40,7 +43,8 @@ class ReplaySorcery(object):
         if not process_found:
             self.current_status = self._statuses["off"]
 
-        print(self.current_status["name"])
+        if DEBUG:
+            print(self.current_status["name"])
 
     def turn_on(self):
         print("Turning ReplaySorcery on")

@@ -18,6 +18,7 @@ class ReplaySorceryGUI(QWidget):
    def __init__(self):
       QWidget.__init__(self)
       self.setWindowTitle('ReplaySorceryGUI')
+      self.setWindowIcon(QIcon('icon.png')) 
       self.setMinimumWidth(300)
 
       layout = QVBoxLayout()
@@ -25,11 +26,12 @@ class ReplaySorceryGUI(QWidget):
 
       self.rs = ReplaySorcery()
 
-      # self.icon = QPixmap("icon.png")
-      # self.icon = self.icon.scaled(92, 92)
-      # self.icon_label = QLabel()
-      # self.icon_label.setPixmap(self.icon)
-      # layout.addWidget(self.icon_label)
+      self.icon = QPixmap("icon.png")
+      self.icon = self.icon.scaled(92, 92)
+      self.icon_label = QLabel()
+      self.icon_label.setPixmap(self.icon)
+      self.icon_label.setAlignment(Qt.AlignCenter)
+      layout.addWidget(self.icon_label)
 
       self.status_text = QLabel()
       self.update_status_text()
