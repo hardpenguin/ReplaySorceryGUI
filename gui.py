@@ -44,6 +44,10 @@ class ReplaySorceryGUI(QWidget):
       self.icon_label.setAlignment(Qt.AlignCenter)
       left_layout.addWidget(self.icon_label)
 
+      self.instructions_text = QLabel()
+      self.instructions_text.setText("Ctrl+Super+R to save\nthe last 30 seconds\n")
+      left_layout.addWidget(self.instructions_text)
+
       self.status_text = QLabel()
       self.update_status_text()
       left_layout.addWidget(self.status_text)
